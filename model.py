@@ -40,4 +40,4 @@ test_loss, test_acc = model.evaluate(test_images, test_labels)
 print('\nTest loss:', test_loss)
 print('Test accuracy:', test_acc)
 
-model.save('MyModel.h5')
+model.save('model.h5')
