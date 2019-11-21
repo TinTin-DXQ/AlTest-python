@@ -97,12 +97,26 @@ def two_attack(img):
             print("two!!!")
             return rImg
     return img
+'''
+def three_attack(img):
+    rImg=copy.copy(img)
+    for i in range(27):
+        rImg[i]=img[27-i]
+    before = np.argmax(model.predict(np.expand_dims(img, 0)))
+    after = np.argmax(model.predict(np.expand_dims(rImg, 0)))
+    if (before != after):
+        print("three")
+    return rIm
+'''
 
 def last_attack(img):
     rImg=copy.copy(img)
-    for i in range(25):
-        for j in range(25):
-            rImg[i][j]=random.random()
+    for i in range(27):
+        for j in range(27):
+            if(i>11 and i<15 and j>11 and j<15):
+                rImg[i][j]=rImg[i][j]
+            else:
+                rImg[i][j]=random.random()
     before = np.argmax(model.predict(np.expand_dims(img, 0)))
     after = np.argmax(model.predict(np.expand_dims(rImg, 0)))
     if(before!=after):
@@ -127,8 +141,7 @@ def generate(images,shape):
             before = np.argmax(model.predict(np.expand_dims(test_image, 0)))
             after = np.argmax(model.predict(np.expand_dims(cImg, 0)))
             if(before==after):
-                cImg = last_attack(test_image)
-
+                cImg=last_attack(test_image)
         generate_images[count] = cImg
         count=count+1
     return generate_images
